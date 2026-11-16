@@ -1,14 +1,9 @@
-from codigo_fuente.estructuras.cola import Cola
-
-
 def buscar_bfs(estacion, origen, destino):
-    colabfs = Cola()
+    frontera = [[origen]]
     visitados = set()
 
-    colabfs.encolar([origen])
-
-    while not colabfs.esta_vacia():
-        camino = colabfs.desencolar()
+    while frontera:
+        camino = frontera.pop(0)
         estacion_actual = camino[-1]
 
         if estacion_actual == destino:
@@ -21,6 +16,6 @@ def buscar_bfs(estacion, origen, destino):
             for vecino in vecinos:
                 nuevo_camino = camino.copy()
                 nuevo_camino.append(vecino)
-                colabfs.encolar(nuevo_camino)
+                frontera.append(nuevo_camino)
 
     return None

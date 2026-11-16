@@ -8,16 +8,17 @@ def seleccionar_red():
     opcion = input("Selecciona la red a cargar (1 o 2): ").strip()
 
     if opcion == "2":
-        return Grafo(red_8, dirigido=False), "Red de Prueba (8 estaciones)"
-    return Grafo(red_12, dirigido=False), "Red Propia (12 estaciones)"
+        return red_8, "Red de Prueba (8 estaciones)"
+    return red_12, "Red Propia (12 estaciones)"
 
 
 def main():
     grafo, nombre_red = seleccionar_red()
     print(f"\nCargada: {nombre_red}")
-    print("Estaciones disponibles:", ", ".join(grafo.obtener_estaciones()))
+    print("Estaciones disponibles:", ", ".join(grafo.keys()))
     print("\nLista de adyacencia:")
-    grafo.mostrar_red()
+    for estacion, vecinos in grafo.items():
+        print(f"  {estacion} -> {', '.join(vecinos)}")
 
     while True:
         print("\n----------------------------------------------")
@@ -44,7 +45,6 @@ def main():
             print(f"DFS (Exploración en profundidad): {' -> '.join(ruta_dfs)} ({len(ruta_dfs) - 1} saltos)")
         else:
             print("DFS: No se encontró ruta.")
-
 
 if __name__ == "__main__":
     main()
